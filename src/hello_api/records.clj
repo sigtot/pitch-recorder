@@ -9,6 +9,7 @@
                 ["SELECT * FROM record"])))
 
 (defn post-records [request]
-  (let [body (request :body)]
-    (jdbc/insert! pg-db :record {:guess (body "guess") :actual (body "actual")}))
+  (let [body-json (json/write-str (request :body))]
+    (let [body (json/read-str body-json :key-fn keyword)]
+      (jdbc/insert! pg-db :record body)) )
   (json/write-str {:ok true}))
