@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS record
     id     SERIAL PRIMARY KEY,
     guess  INTEGER,
     actual INTEGER,
-    time   TIME
+    time   TIME DEFAULT NOW()
 );
-INSERT INTO record (guess, actual, time)
-values (12, 13, NOW());
+INSERT INTO record (guess, actual)
+values (12, 13);

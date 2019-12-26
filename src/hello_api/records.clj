@@ -10,7 +10,5 @@
 
 (defn post-records [request]
   (let [body (request :body)]
-    (jdbc/execute! pg-db
-                ["INSERT INTO record (guess, actual, time) VALUES (?, ?, NOW())"
-                 (body "guess") (body "actual")]))
+    (jdbc/insert! pg-db :record {:guess (body "guess") :actual (body "actual")}))
   (json/write-str {:ok true}))
