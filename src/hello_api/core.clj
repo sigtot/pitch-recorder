@@ -2,12 +2,12 @@
   (:require [compojure.core :refer :all]
             [compojure.route :as route]
             [clojure.data.json :as json]
-            [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
+            [ring.middleware.defaults :refer [wrap-defaults api-defaults]]
             [ring.middleware.json :refer [wrap-json-response wrap-json-body]]
             [ring.middleware.cors :refer [wrap-cors]]
             [muuntaja.core :as m]
             [ring.util.response :as r]
-            [hello-api.records :refer [get-records]]
+            [hello-api.records :as records]
             [hello-api.swagger :as swagger])
   (:import (java.sql Time)))
 
@@ -18,7 +18,10 @@
 
 (defroutes app-routes
            (GET "/records" []
-             (r/response (->> (get-records)
+             (r/response (->> (records/get-records)
+                              (m/encode "application/json"))))
+           (POST "/records" req
+             (r/response (->> (records/post-records req)
                               (m/encode "application/json"))))
            (GET "/doc" []
              (r/response (->> (swagger/doc)
@@ -29,7 +32,7 @@
   (-> app-routes
       wrap-json-body
       wrap-json-response
-      (wrap-defaults site-defaults)
+      (wrap-defaults api-defaults)
       (wrap-cors
         :access-control-allow-origin [#".*"]
         :access-control-allow-methods [:get])))
