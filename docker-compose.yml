@@ -1,4 +1,4 @@
-version: '3'
+version: '3.7'
 
 services:
   db:
@@ -11,6 +11,17 @@ services:
       - 5432:5432
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+  frontend:
+    build:
+      context: ./frontend
+      target: base
+    ports:
+      - "3001:3000"
+    command: ["yarn", "start"]
+    volumes:
+      - ./frontend/src:/frontend/src
+      - ./frontend/resources:/frontend/resources
+      - ./frontend/public:/frontend/public
   swagger:
     image: swaggerapi/swagger-ui
     restart: always
