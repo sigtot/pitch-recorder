@@ -18,5 +18,7 @@
   :plugins [[lein-ring "0.12.5"]]
   :ring {:handler hello-api.core/app}
   :repl-options {:init-ns hello-api.core}
+  :profiles
+  {:dev {:dependencies [[ring/ring-mock "0.3.2"]]}}
   :jvm-opts ["-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5010"])
 
