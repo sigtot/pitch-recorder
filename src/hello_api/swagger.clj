@@ -1,11 +1,6 @@
 (ns hello-api.swagger
-  (:require [compojure.core :refer :all]
-            [ring.swagger.swagger2 :as rs]
-            [schema.core :as s]
-            [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
-            [ring.middleware.json :refer [wrap-json-response wrap-json-body]]
-            [ring.middleware.cors :refer [wrap-cors]]
-            [hello-api.records :refer [get-records]]))
+  (:require [ring.swagger.swagger2 :as rs]
+            [schema.core :as s]))
 
 (s/defschema Record {:guess  s/Int
                      :actual s/Int
