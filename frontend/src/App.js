@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
-import {Link, Route, BrowserRouter as Router, Switch} from "react-router-dom";
+import Home from './components/Home';
+import {Link, Route, BrowserRouter as Router, Switch} from 'react-router-dom';
 
 function App() {
     return (
@@ -29,7 +30,7 @@ function App() {
         */}
                 <Switch>
                     <Route exact path="/">
-                        <div>Home</div>
+                        <Home/>
                     </Route>
                     <Route path="/guess">
                         <div>Guess</div>
