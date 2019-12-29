@@ -18,7 +18,7 @@ const KeyName = ({daKey}) =>
 export default function GuessResult({guess, actual}) {
     return (
         <TransitionDiv>
-            <h1>
+            <h2>
                 {
                     guess !== -1
                         ? (
@@ -26,8 +26,8 @@ export default function GuessResult({guess, actual}) {
                                 <KeyName daKey={guess}/>
                                 {actual !== -1 ? <span>/<KeyName daKey={actual}/></span> : ''}
                             </span>)
-                        : 'Make a guess'}
-            </h1>
+                        : '(Not chosen)'}
+            </h2>
         </TransitionDiv>
     )
 }

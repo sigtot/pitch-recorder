@@ -17,9 +17,16 @@ const GreenGuessButton = styled(GuessButton)`
     text-shadow: 0 1px 2px rgba(76, 175, 80, 0.4);
 `;
 
-const GuessButtonContainer = styled.div`
+const FlexCenter = styled.div`
     display: flex;
     justify-content: center;
+`;
+
+const SmallerH1 = styled.div`
+font-size: 1.7em;
+`;
+
+const GuessButtonContainer = styled(FlexCenter)`
     margin-top: 20px;
 `;
 
@@ -55,6 +62,16 @@ export default function Guess() {
 
     return (
         <div>
+            <FlexCenter>
+                <Switch>
+                    <Route exact path="/guess">
+                        <SmallerH1>Guess the tone in your head</SmallerH1>
+                    </Route>
+                    <Route exact path="/guess/check">
+                        <SmallerH1>Now check if you were right</SmallerH1>
+                    </Route>
+                </Switch>
+            </FlexCenter>
             <GuessResult guess={guess} actual={actual}/>
             <Switch>
                 <Route exact path="/guess">
