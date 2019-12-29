@@ -35,4 +35,4 @@
       (wrap-defaults api-defaults)
       (wrap-cors
         :access-control-allow-origin [#".*"]
-        :access-control-allow-methods [:get])))
+        :access-control-allow-methods [:get :post])))
