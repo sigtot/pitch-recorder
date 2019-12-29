@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {keyName, getOctave} from '../piano'
 import KeyInput from './KeyInput'
 import NeuButton from "./NeuButton";
+import {Link, Route, Switch} from "react-router-dom";
 
 const Sub = styled.span`
     font-size: 15px;
@@ -26,13 +27,21 @@ export default function Guess() {
     return (
         <div>
             <h1>{keyName(guess)}<Sub>({getOctave(guess) + 1})</Sub></h1>
-            <KeyInput
-                currentKey={guess} onKeyUpdate={key => setGuess(key)}
-                cNum={cNum} onCNumUpdate={cNum => setCNum(cNum)}
-            />
-            <GuessButtonContainer>
-                <GuessButton>Make this guess</GuessButton>
-            </GuessButtonContainer>
+            <Switch>
+                <Route exact path="/guess">
+                    <KeyInput
+                        currentKey={guess} onKeyUpdate={key => setGuess(key)}
+                        cNum={cNum} onCNumUpdate={cNum => setCNum(cNum)}/>
+                    <GuessButtonContainer>
+                        <Link to="/guess/check">
+                            <GuessButton>Make this guess</GuessButton>
+                        </Link>
+                    </GuessButtonContainer>
+                </Route>
+                <Route exact path="/guess/check">
+                    Check it
+                </Route>
+            </Switch>
         </div>
     )
 }
