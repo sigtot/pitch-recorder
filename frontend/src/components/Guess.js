@@ -23,7 +23,22 @@ const GuessButtonContainer = styled.div`
 `;
 
 const postGuess = (guess, actual) => {
-    console.log("Not implemented", guess, actual);
+    fetch('http://localhost:3000/records', {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({guess: guess, actual: actual}),
+    })
+        .then(res => res.json())
+        .then(JSON.parse)
+        .then(res => {
+            if (res["ok"] !== undefined && res["ok"] === true) {
+                console.log("Success")
+            }
+        })
+        .catch(err => console.error(err))
 };
 
 export default function Guess() {
@@ -59,8 +74,8 @@ export default function Guess() {
                             ? (
                                 <GuessButtonContainer>
                                     <GreenGuessButton
-                                        onClick={postGuess(guess, actual)}>
-                                        Save this guess
+                                        onClick={() => postGuess(guess, actual)}>
+                                        Save
                                     </GreenGuessButton>
                                 </GuessButtonContainer>)
                             : ''
