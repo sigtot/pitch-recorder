@@ -27,15 +27,15 @@ const addBorderIfSelected = (Key, sel) => (
     sel ? styled(Key)`&& {border: 4px solid rgba(129, 199, 132, 0.6);}` : Key
 );
 
-const KeyInput = (props) => {
+const KeyInput = ({currentKey, onKeyUpdate, cNum, onCNumUpdate}) => {
     const numberedPiano = (startNum) => (
         <Piano>
             <FlexDiv>
                 {keys.map((Key, i) => {
                     const StyledKey = addBorderIfSelected(Key,
-                        relKeyNum(props.currentKey, props.cNum) === i);
+                        relKeyNum(currentKey, cNum) === i);
                     return <StyledKey key={i}
-                                      onClick={() => props.onKeyUpdate(startNum + i)}/>
+                                      onClick={() => onKeyUpdate(startNum + i)}/>
                 })}
             </FlexDiv>
         </Piano>
@@ -44,11 +44,11 @@ const KeyInput = (props) => {
     return (
         <div>
             <PianoContainer>
-                {numberedPiano(getC(props.cNum))}
+                {numberedPiano(getC(cNum))}
             </PianoContainer>
-            <button onClick={() => props.onCNumUpdate(props.cNum - 1)}>Left
+            <button onClick={() => onCNumUpdate(cNum - 1)}>Left
             </button>
-            <button onClick={() => props.onCNumUpdate(props.cNum + 1)}>Right
+            <button onClick={() => onCNumUpdate(cNum + 1)}>Right
             </button>
         </div>
     )
