@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Key from './Key'
 import BlackKey from "./BlackKey";
 import styled from 'styled-components';
@@ -21,7 +21,6 @@ const PianoContainer = styled.div`
 `;
 
 const KeyInput = (props) => {
-    const [cNo, setCNo] = useState(3);
     function numberedPiano(startNum) {
         return (
             <Piano>
@@ -47,10 +46,12 @@ const KeyInput = (props) => {
     return (
         <div>
             <PianoContainer>
-                {numberedPiano(getC(cNo))}
+                {numberedPiano(getC(props.cNo))}
             </PianoContainer>
-            <button onClick={() => setCNo(cNo - 1)}>Left</button>
-            <button onClick={() => setCNo(cNo + 1)}>Right</button>
+            <button onClick={() => props.onCNoUpdate(props.cNo - 1)}>Left
+            </button>
+            <button onClick={() => props.onCNoUpdate(props.cNo + 1)}>Right
+            </button>
         </div>
     )
 };
