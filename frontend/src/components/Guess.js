@@ -4,8 +4,7 @@ import KeyInput from './KeyInput'
 import NeuButton from "./NeuButton";
 import {Link, Route, Switch} from "react-router-dom";
 import GuessResult from "./GuessResult";
-import {frequency} from "../piano";
-import {getAudioContext, playSound} from "../synth";
+import {getAudioContext, playPianoNote} from "../synth";
 
 const GuessButton = styled(NeuButton)`
     font-size: 20px;
@@ -51,7 +50,7 @@ export default function Guess() {
 
     const onCheckKeyUpdate = (key) => {
         setActual(key);
-        playSound(audioCtx, frequency(key));
+        playPianoNote(audioCtx, key);
     };
 
     return (
