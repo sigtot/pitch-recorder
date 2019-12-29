@@ -3,6 +3,7 @@ import WhiteKey from './WhiteKey'
 import BlackKey from "./BlackKey";
 import styled from 'styled-components';
 import {getC, relKeyNum, numOctaves, keyMap, octaveLength} from "../piano";
+import NeuButton from './NeuButton'
 
 const Piano = styled.div`
     box-shadow: 9px 9px 16px rgb(163,177,198,0.6), -9px -9px 16px  rgba(255,255,255, 0.5);
@@ -22,21 +23,6 @@ const FlexCenter = styled.div`
 
 const ButtonContainer = styled(FlexCenter)`
     margin-top: 20px;
-`;
-
-const NiceButton = styled.button`
-    box-shadow: 9px 9px 16px rgb(163,177,198,0.6), -9px -9px 16px  rgba(255,255,255, 0.5);
-    background-color: #E0E5EC;
-    outline: none;
-    border: none;
-    border-radius: 5px;
-    padding: 15px 20px;
-    font-size: 25px;
-    font-weight: bold;
-    margin: 0 10px;
-    &:active {
-        box-shadow: 6px 6px 12px rgb(163,177,198,0.6), -6px -6px 12px rgba(255,255,255, 0.5);
-    }
 `;
 
 const keys = [WhiteKey, BlackKey, WhiteKey, BlackKey, WhiteKey, WhiteKey,
@@ -79,10 +65,10 @@ const KeyInput = ({currentKey, onKeyUpdate, cNum, onCNumUpdate}) => {
                 {numberedPiano(getC(cNum))}
             </FlexCenter>
             <ButtonContainer>
-                <NiceButton onClick={() => movePiano(-1)}>&larr;
-                </NiceButton>
-                <NiceButton onClick={() => movePiano(1)}>&rarr;
-                </NiceButton>
+                <NeuButton onClick={() => movePiano(-1)}>&larr;
+                </NeuButton>
+                <NeuButton onClick={() => movePiano(1)}>&rarr;
+                </NeuButton>
             </ButtonContainer>
         </div>
     )
