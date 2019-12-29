@@ -9,13 +9,13 @@ const Sub = styled.span`
 
 export default function Guess() {
     const [guess, setGuess] = useState(-1);
-    const [cNo, setCNo] = useState(3);
+    const [cNum, setCNum] = useState(3);
     return (
         <div>
             <h1>{keyName(guess)}<Sub>({getOctave(guess) + 1})</Sub></h1>
             <KeyInput
                 currentKey={guess} onKeyUpdate={key => setGuess(key)}
-                cNo={cNo} onCNoUpdate={cNo => setCNo(cNo)}
+                cNum={cNum} onCNumUpdate={cNum => setCNum(cNum)}
             />
         </div>
     )
