@@ -5,6 +5,7 @@ import NeuButton from "./NeuButton";
 import {Link, Route, Switch} from "react-router-dom";
 import GuessResult from "./GuessResult";
 import {frequency} from "../piano";
+import {getAudioContext, playSound} from "../synth";
 
 const GuessButton = styled(NeuButton)`
     font-size: 20px;
@@ -42,23 +43,6 @@ const postGuess = (guess, actual) => {
         .catch(err => console.error(err))
 };
 
-const getAudioContext = () => {
-    AudioContext = window.AudioContext || window.webkitAudioContext;
-    return new AudioContext();
-};
-
-const playSound = (audioCtx, freq) => {
-    const oscNode = audioCtx.createOscillator();
-    oscNode.frequency.value = freq;
-    oscNode.start(0);
-    const gainNode = audioCtx.createGain();
-    gainNode.gain.value = 1;
-    oscNode.connect(gainNode);
-    gainNode.gain.setTargetAtTime(0, audioCtx.currentTime, 0.2);
-    gainNode.connect(audioCtx.destination);
-    window.setTimeout(() => oscNode.disconnect(), 3000);
-};
-
 export default function Guess() {
     const [guess, setGuess] = useState(-1);
     const [actual, setActual] = useState(-1);
@@ -67,7 +51,7 @@ export default function Guess() {
 
     const onCheckKeyUpdate = (key) => {
         setActual(key);
-        playSound(audioCtx, frequency(key))
+        playSound(audioCtx, frequency(key));
     };
 
     return (
