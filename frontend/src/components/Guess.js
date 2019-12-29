@@ -5,6 +5,7 @@ import NeuButton from "./NeuButton";
 import {Link, Route, Switch} from "react-router-dom";
 import GuessResult from "./GuessResult";
 import {getAudioContext, playPianoNote} from "../synth";
+import {useHistory} from 'react-router-dom';
 
 const GuessButton = styled(NeuButton)`
     font-size: 20px;
@@ -31,7 +32,7 @@ const GuessButtonContainer = styled(FlexCenter)`
 `;
 
 const postGuess = (guess, actual) => {
-    fetch('http://localhost:3000/records', {
+    return fetch('http://localhost:3000/records', {
         method: 'POST',
         mode: 'cors',
         headers: {
@@ -42,18 +43,26 @@ const postGuess = (guess, actual) => {
         .then(res => res.json())
         .then(JSON.parse)
         .then(res => {
-            if (res["ok"] !== undefined && res["ok"] === true) {
-                console.log("Success")
+            if (!(res['ok'] !== undefined && res['ok'] === true)) {
+                console.error('Got non-ok response from API', res)
             }
         })
         .catch(err => console.error(err))
 };
+
 
 export default function Guess() {
     const [guess, setGuess] = useState(-1);
     const [actual, setActual] = useState(-1);
     const [cNum, setCNum] = useState(3);
     const audioCtx = getAudioContext();
+    const history = useHistory();
+
+    const onSaveButtonClick = (guess, actual) => {
+        postGuess(guess, actual).then(() => {
+            history.push("/")
+        });
+    };
 
     const onCheckKeyUpdate = (key) => {
         setActual(key);
@@ -99,7 +108,7 @@ export default function Guess() {
                             ? (
                                 <GuessButtonContainer>
                                     <GreenGuessButton
-                                        onClick={() => postGuess(guess, actual)}>
+                                        onClick={() => onSaveButtonClick(guess, actual)}>
                                         Save
                                     </GreenGuessButton>
                                 </GuessButtonContainer>)
