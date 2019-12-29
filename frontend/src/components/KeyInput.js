@@ -24,7 +24,7 @@ const keys = [WhiteKey, BlackKey, WhiteKey, BlackKey, WhiteKey, WhiteKey,
     BlackKey, WhiteKey, BlackKey, WhiteKey, BlackKey, WhiteKey, WhiteKey];
 
 const addBorderIfSelected = (Key, selected) => (
-    (selected) ? styled(Key)`border: 1px solid #00ff00;` : Key
+    (selected) ? styled(Key)`border: 4px solid rgba(129, 199, 132, 0.6);` : Key
 );
 
 const KeyInput = (props) => {
