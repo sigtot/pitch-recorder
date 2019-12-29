@@ -1,5 +1,5 @@
 import React from 'react';
-import WhiteKey from './Key'
+import WhiteKey from './WhiteKey'
 import BlackKey from "./BlackKey";
 import styled from 'styled-components';
 import {getC, relKeyNum} from "../piano";
@@ -24,7 +24,9 @@ const keys = [WhiteKey, BlackKey, WhiteKey, BlackKey, WhiteKey, WhiteKey,
     BlackKey, WhiteKey, BlackKey, WhiteKey, BlackKey, WhiteKey, WhiteKey];
 
 const addBorderIfSelected = (Key, selected) => (
-    (selected) ? styled(Key)`border: 4px solid rgba(129, 199, 132, 0.6);` : Key
+    selected
+        ? styled(Key)`&& {border: 4px solid rgba(129, 199, 132, 0.6);}`
+        : Key
 );
 
 const KeyInput = (props) => {
@@ -33,7 +35,7 @@ const KeyInput = (props) => {
             <FlexDiv>
                 {keys.map((Key, i) => {
                     const StyledKey = addBorderIfSelected(Key,
-                        relKeyNum(props.currentKey) === i);
+                        relKeyNum(props.currentKey, props.cNo) === i);
                     return <StyledKey key={i}
                                       onClick={() => props.onKeyUpdate(startNum + i)}/>
                 })}

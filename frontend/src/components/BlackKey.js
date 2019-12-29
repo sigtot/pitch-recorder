@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Key from './Key'
+import Key from './WhiteKey'
 
 export default styled(Key)`
     width: 30px;

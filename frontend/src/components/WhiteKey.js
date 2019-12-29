@@ -9,8 +9,7 @@ export default styled.div`
     border-radius: 2px;
     z-index: 1;
     box-sizing: border-box;
-    border-right: 1px solid #bbb;
-    &:last-of-type {
-        border-right: none;
+    &:not(:last-of-type) {
+        border-right: 1px solid #bbb;
     }
 `;

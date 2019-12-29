@@ -1,7 +1,7 @@
 const firstCOffset = 3; // A = 0, A# = 1, B = 2, C = 3;
 const octaveLength = 12;
 
-export const getC = CNum => firstCOffset + octaveLength * CNum;
+export const getC = cNum => firstCOffset + octaveLength * cNum;
 
 export const getOctave = keyNum =>
     Math.floor((keyNum - firstCOffset) / octaveLength);
@@ -20,5 +20,5 @@ export const keyMap = [
     "A#",
     "B"];
 
-export const relKeyNum = keyNum => (keyNum - firstCOffset) % octaveLength;
-export const keyName = keyNum => keyMap[relKeyNum(keyNum)];
+export const relKeyNum = (keyNum, cNum) => keyNum - getC(cNum);
+export const keyName = keyNum => keyMap[(keyNum - firstCOffset) % octaveLength];
