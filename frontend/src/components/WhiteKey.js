@@ -11,4 +11,11 @@ export default styled.div`
     &:not(:last-of-type) {
         border-right: 1px solid #bbb;
     }
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    text-align: center;
+    color: #555;
+    font-weight: bold;
+    padding-bottom: 5px;
 `;

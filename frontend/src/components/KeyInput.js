@@ -2,7 +2,7 @@ import React from 'react';
 import WhiteKey from './WhiteKey'
 import BlackKey from "./BlackKey";
 import styled from 'styled-components';
-import {getC, relKeyNum, numOctaves} from "../piano";
+import {getC, relKeyNum, numOctaves, keyMap, octaveLength} from "../piano";
 
 const Piano = styled.div`
     box-shadow: 9px 9px 16px rgb(163,177,198,0.6), -9px -9px 16px  rgba(255,255,255, 0.5);
@@ -15,9 +15,28 @@ const FlexDiv = styled.div`
     display: flex;
 `;
 
-const PianoContainer = styled.div`
+const FlexCenter = styled.div`
     display: flex;
     justify-content: center;
+`;
+
+const ButtonContainer = styled(FlexCenter)`
+    margin-top: 20px;
+`;
+
+const NiceButton = styled.button`
+    box-shadow: 9px 9px 16px rgb(163,177,198,0.6), -9px -9px 16px  rgba(255,255,255, 0.5);
+    background-color: #E0E5EC;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    padding: 15px 20px;
+    font-size: 25px;
+    font-weight: bold;
+    margin: 0 10px;
+    &:active {
+        box-shadow: 6px 6px 12px rgb(163,177,198,0.6), -6px -6px 12px rgba(255,255,255, 0.5);
+    }
 `;
 
 const keys = [WhiteKey, BlackKey, WhiteKey, BlackKey, WhiteKey, WhiteKey,
@@ -34,8 +53,14 @@ const KeyInput = ({currentKey, onKeyUpdate, cNum, onCNumUpdate}) => {
                 {keys.map((Key, i) => {
                     const StyledKey = addBorderIfSelected(Key,
                         relKeyNum(currentKey, cNum) === i);
-                    return <StyledKey key={i}
-                                      onClick={() => onKeyUpdate(startNum + i)}/>
+                    return (
+                        <StyledKey
+                            key={i}
+                            onClick={() => onKeyUpdate(startNum + i)}>
+                            {keyMap[i] === 'C'
+                                ? (1 + cNum + Math.floor(i / octaveLength))
+                                : ''}
+                        </StyledKey>)
                 })}
             </FlexDiv>
         </Piano>
@@ -50,13 +75,15 @@ const KeyInput = ({currentKey, onKeyUpdate, cNum, onCNumUpdate}) => {
 
     return (
         <div>
-            <PianoContainer>
+            <FlexCenter>
                 {numberedPiano(getC(cNum))}
-            </PianoContainer>
-            <button onClick={() => movePiano(-1)}>Left
-            </button>
-            <button onClick={() => movePiano(1)}>Right
-            </button>
+            </FlexCenter>
+            <ButtonContainer>
+                <NiceButton onClick={() => movePiano(-1)}>&larr;
+                </NiceButton>
+                <NiceButton onClick={() => movePiano(1)}>&rarr;
+                </NiceButton>
+            </ButtonContainer>
         </div>
     )
 };
