@@ -17,7 +17,11 @@ export const playSound = (audioCtx, freq, gain) => {
     oscNode.connect(gainNode);
     gainNode.gain.setTargetAtTime(0, audioCtx.currentTime, 0.2);
     gainNode.connect(audioCtx.destination);
-    window.setTimeout(() => gainNode.disconnect(), 3000);
+    window.setTimeout(() => {
+        gainNode.disconnect();
+        oscNode.disconnect();
+        oscNode.stop();
+    }, 3000);
 };
 
 export const playPianoNote = (audioCtx, key) => {
