@@ -20,5 +20,5 @@ export const keyMap = [
     "A#",
     "B"];
 
-export const relativeKeyNum = keyNum => (keyNum - firstCOffset) % octaveLength;
-export const keyName = keyNum => keyMap[relativeKeyNum(keyNum)];
+export const relKeyNum = keyNum => (keyNum - firstCOffset) % octaveLength;
+export const keyName = keyNum => keyMap[relKeyNum(keyNum)];

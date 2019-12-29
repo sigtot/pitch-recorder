@@ -2,7 +2,7 @@ import React from 'react';
 import WhiteKey from './Key'
 import BlackKey from "./BlackKey";
 import styled from 'styled-components';
-import {getC} from "../piano";
+import {getC, relKeyNum} from "../piano";
 
 const Piano = styled.div`
     box-shadow: 9px 9px 16px rgb(163,177,198,0.6), -9px -9px 16px  rgba(255,255,255, 0.5);
@@ -23,13 +23,20 @@ const PianoContainer = styled.div`
 const keys = [WhiteKey, BlackKey, WhiteKey, BlackKey, WhiteKey, WhiteKey,
     BlackKey, WhiteKey, BlackKey, WhiteKey, BlackKey, WhiteKey, WhiteKey];
 
+const addBorderIfSelected = (Key, selected) => (
+    (selected) ? styled(Key)`border: 1px solid #00ff00;` : Key
+);
+
 const KeyInput = (props) => {
-    const  numberedPiano = (startNum) => (
+    const numberedPiano = (startNum) => (
         <Piano>
             <FlexDiv>
-                {keys.map((Boi, i) =>
-                    <Boi key={i}
-                         onClick={() => props.onKeyUpdate(startNum + i)}/>)}
+                {keys.map((Key, i) => {
+                    const StyledKey = addBorderIfSelected(Key,
+                        relKeyNum(props.currentKey) === i);
+                    return <StyledKey key={i}
+                                      onClick={() => props.onKeyUpdate(startNum + i)}/>
+                })}
             </FlexDiv>
         </Piano>
     );

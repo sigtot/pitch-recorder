@@ -14,7 +14,7 @@ export default function Guess() {
         <div>
             <h1>{keyName(guess)}<Sub>({getOctave(guess) + 1})</Sub></h1>
             <KeyInput
-                key={guess} onKeyUpdate={key => setGuess(key)}
+                currentKey={guess} onKeyUpdate={key => setGuess(key)}
                 cNo={cNo} onCNoUpdate={cNo => setCNo(cNo)}
             />
         </div>
