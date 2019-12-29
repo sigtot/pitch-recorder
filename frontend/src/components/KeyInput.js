@@ -1,5 +1,5 @@
 import React from 'react';
-import Key from './Key'
+import WhiteKey from './Key'
 import BlackKey from "./BlackKey";
 import styled from 'styled-components';
 import {getC} from "../piano";
@@ -20,8 +20,8 @@ const PianoContainer = styled.div`
     justify-content: center;
 `;
 
-const keys = [Key, BlackKey, Key, BlackKey, Key, Key, BlackKey, Key, BlackKey,
-    Key, BlackKey, Key, Key];
+const keys = [WhiteKey, BlackKey, WhiteKey, BlackKey, WhiteKey, WhiteKey,
+    BlackKey, WhiteKey, BlackKey, WhiteKey, BlackKey, WhiteKey, WhiteKey];
 
 const KeyInput = (props) => {
     const  numberedPiano = (startNum) => (
