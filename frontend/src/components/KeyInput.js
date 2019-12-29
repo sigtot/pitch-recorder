@@ -2,7 +2,7 @@ import React from 'react';
 import WhiteKey from './WhiteKey'
 import BlackKey from "./BlackKey";
 import styled from 'styled-components';
-import {getC, relKeyNum} from "../piano";
+import {getC, relKeyNum, numOctaves} from "../piano";
 
 const Piano = styled.div`
     box-shadow: 9px 9px 16px rgb(163,177,198,0.6), -9px -9px 16px  rgba(255,255,255, 0.5);
@@ -41,14 +41,21 @@ const KeyInput = ({currentKey, onKeyUpdate, cNum, onCNumUpdate}) => {
         </Piano>
     );
 
+    const movePiano = (diff) => {
+        const newCNum = cNum + diff;
+        if (0 <= newCNum && newCNum <= numOctaves) {
+            onCNumUpdate(newCNum)
+        }
+    };
+
     return (
         <div>
             <PianoContainer>
                 {numberedPiano(getC(cNum))}
             </PianoContainer>
-            <button onClick={() => onCNumUpdate(cNum - 1)}>Left
+            <button onClick={() => movePiano(-1)}>Left
             </button>
-            <button onClick={() => onCNumUpdate(cNum + 1)}>Right
+            <button onClick={() => movePiano(1)}>Right
             </button>
         </div>
     )

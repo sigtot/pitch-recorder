@@ -1,5 +1,6 @@
 const firstCOffset = 3; // A = 0, A# = 1, B = 2, C = 3;
 const octaveLength = 12;
+export const numOctaves = 7;
 
 export const getC = cNum => firstCOffset + octaveLength * cNum;
 
