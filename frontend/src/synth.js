@@ -22,7 +22,7 @@ export const playSound = (audioCtx, freq, gain) => {
 
 export const playPianoNote = (audioCtx, key) => {
     const numOvertones = numOctaves - getOctave(key);
-    for (let i = 1; i <= numOvertones; i++) {
+    for (let i = 1; i <= numOvertones + 1; i++) {
         playSound(audioCtx, i * frequency(key), A4Gain*Math.exp(-(i - 1)*harmonicFalloff));
     }
 };
