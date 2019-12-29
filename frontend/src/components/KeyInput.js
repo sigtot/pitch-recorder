@@ -23,10 +23,8 @@ const PianoContainer = styled.div`
 const keys = [WhiteKey, BlackKey, WhiteKey, BlackKey, WhiteKey, WhiteKey,
     BlackKey, WhiteKey, BlackKey, WhiteKey, BlackKey, WhiteKey, WhiteKey];
 
-const addBorderIfSelected = (Key, selected) => (
-    selected
-        ? styled(Key)`&& {border: 4px solid rgba(129, 199, 132, 0.6);}`
-        : Key
+const addBorderIfSelected = (Key, sel) => (
+    sel ? styled(Key)`&& {border: 4px solid rgba(129, 199, 132, 0.6);}` : Key
 );
 
 const KeyInput = (props) => {
