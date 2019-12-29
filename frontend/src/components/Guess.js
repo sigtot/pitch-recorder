@@ -7,8 +7,13 @@ import GuessResult from "./GuessResult";
 
 const GuessButton = styled(NeuButton)`
     font-size: 20px;
+    color: #2196f3;
+    text-shadow: 0 1px 2px rgba(33, 150, 243, 0.4);
+`;
+
+const GreenGuessButton = styled(GuessButton)`
     color: #4caf50;
-    text-shadow: 0 1px 2px rgba(76, 175, 80, 0.3);
+    text-shadow: 0 1px 2px rgba(76, 175, 80, 0.4);
 `;
 
 const GuessButtonContainer = styled.div`
@@ -53,10 +58,10 @@ export default function Guess() {
                         actual !== -1 && guess !== -1
                             ? (
                                 <GuessButtonContainer>
-                                    <GuessButton
+                                    <GreenGuessButton
                                         onClick={postGuess(guess, actual)}>
                                         Save this guess
-                                    </GuessButton>
+                                    </GreenGuessButton>
                                 </GuessButtonContainer>)
                             : ''
                     }
