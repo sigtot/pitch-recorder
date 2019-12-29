@@ -20,28 +20,19 @@ const PianoContainer = styled.div`
     justify-content: center;
 `;
 
+const keys = [Key, BlackKey, Key, BlackKey, Key, Key, BlackKey, Key, BlackKey,
+    Key, BlackKey, Key, Key];
+
 const KeyInput = (props) => {
-    function numberedPiano(startNum) {
-        return (
-            <Piano>
-                <FlexDiv>
-                    <Key onClick={() => props.onKeyUpdate(startNum + 0)}/>
-                    <BlackKey onClick={() => props.onKeyUpdate(startNum + 1)}/>
-                    <Key onClick={() => props.onKeyUpdate(startNum + 2)}/>
-                    <BlackKey onClick={() => props.onKeyUpdate(startNum + 3)}/>
-                    <Key onClick={() => props.onKeyUpdate(startNum + 4)}/>
-                    <Key onClick={() => props.onKeyUpdate(startNum + 5)}/>
-                    <BlackKey onClick={() => props.onKeyUpdate(startNum + 6)}/>
-                    <Key onClick={() => props.onKeyUpdate(startNum + 7)}/>
-                    <BlackKey onClick={() => props.onKeyUpdate(startNum + 8)}/>
-                    <Key onClick={() => props.onKeyUpdate(startNum + 9)}/>
-                    <BlackKey onClick={() => props.onKeyUpdate(startNum + 10)}/>
-                    <Key onClick={() => props.onKeyUpdate(startNum + 11)}/>
-                    <Key onClick={() => props.onKeyUpdate(startNum + 12)}/>
-                </FlexDiv>
-            </Piano>
-        )
-    }
+    const  numberedPiano = (startNum) => (
+        <Piano>
+            <FlexDiv>
+                {keys.map((Boi, i) =>
+                    <Boi key={i}
+                         onClick={() => props.onKeyUpdate(startNum + i)}/>)}
+            </FlexDiv>
+        </Piano>
+    );
 
     return (
         <div>
