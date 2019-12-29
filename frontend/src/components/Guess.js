@@ -48,11 +48,15 @@ const getAudioContext = () => {
 };
 
 const playSound = (audioCtx, freq) => {
-    const osc = audioCtx.createOscillator();
-    osc.frequency.value = freq;
-    osc.start(0);
-    osc.connect(audioCtx.destination);
-    window.setTimeout(() => osc.disconnect(), 1000);
+    const oscNode = audioCtx.createOscillator();
+    oscNode.frequency.value = freq;
+    oscNode.start(0);
+    const gainNode = audioCtx.createGain();
+    gainNode.gain.value = 1;
+    oscNode.connect(gainNode);
+    gainNode.gain.setTargetAtTime(0, audioCtx.currentTime, 0.2);
+    gainNode.connect(audioCtx.destination);
+    window.setTimeout(() => oscNode.disconnect(), 3000);
 };
 
 export default function Guess() {
