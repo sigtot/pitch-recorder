@@ -11,12 +11,12 @@ export const getAudioContext = () => {
 export const playSound = (audioCtx, freq, gain) => {
     const oscNode = audioCtx.createOscillator();
     oscNode.frequency.value = freq;
-    oscNode.start(0);
     const gainNode = audioCtx.createGain();
     gainNode.gain.value = gain;
     oscNode.connect(gainNode);
     gainNode.gain.setTargetAtTime(0, audioCtx.currentTime, 0.2);
     gainNode.connect(audioCtx.destination);
+    oscNode.start(0);
     window.setTimeout(() => {
         gainNode.disconnect();
         oscNode.disconnect();
