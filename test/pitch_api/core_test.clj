@@ -1,7 +1,7 @@
-(ns hello-api.core-test
+(ns pitch-api.core-test
   (:require [clojure.test :refer :all]
             [ring.mock.request :as mock]
-            [hello-api.core :refer :all]))
+            [pitch-api.core :refer :all]))
 
 (deftest test-records
   (testing "/records"

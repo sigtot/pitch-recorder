@@ -1,4 +1,4 @@
-(ns hello-api.core
+(ns pitch-api.core
   (:require [compojure.core :refer :all]
             [compojure.route :as route]
             [clojure.data.json :as json]
@@ -7,8 +7,8 @@
             [ring.middleware.cors :refer [wrap-cors]]
             [muuntaja.core :as m]
             [ring.util.response :as r]
-            [hello-api.records :as records]
-            [hello-api.swagger :as swagger])
+            [pitch-api.records :as records]
+            [pitch-api.swagger :as swagger])
   (:import (java.sql Timestamp)))
 
 (extend-type Timestamp

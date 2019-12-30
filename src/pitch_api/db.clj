@@ -1,4 +1,4 @@
-(ns hello-api.db)
+(ns pitch-api.db)
 
 (def pg-db {:dbtype   "postgresql"
             :dbname   "notes"

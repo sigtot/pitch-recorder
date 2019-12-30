@@ -1,4 +1,4 @@
-# hello-api
+# pitch-api
 ## Basic Structure
 The basic components:
 * Clojure json API

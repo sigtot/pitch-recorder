@@ -1,4 +1,4 @@
-(ns hello-api.swagger
+(ns pitch-api.swagger
   (:require [ring.swagger.swagger2 :as rs]
             [schema.core :as s]))
 
