@@ -24,7 +24,7 @@ services:
     ports:
       - 8082:3000
     environment:
-      LEIN_NO_DEV: true
+      LEIN_NO_DEV: "true"
 
 volumes:
   frontend-files:
