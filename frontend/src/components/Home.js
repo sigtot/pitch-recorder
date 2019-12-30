@@ -64,7 +64,7 @@ export default function Home() {
                 <RecordsContainer>
                     <h2>Records</h2>
                     <PlainUl>
-                        {records.map(rec => (
+                        {records.reverse().map(rec => (
                             <Record id={rec.id}
                                     guess={rec.guess}
                                     actual={rec.actual}
