@@ -18,6 +18,10 @@ services:
       context: .
     ports:
       - 3000:3000
+    volumes:
+      - ./src:/usr/src/app/src
+      - ./test:/usr/src/app/test
+      - ./resources:/usr/src/app/resources
   frontend:
     depends_on:
       - api
