@@ -11,7 +11,16 @@ services:
       - 5432:5432
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+  api:
+    depends_on:
+      - db
+    build:
+      context: .
+    ports:
+      - 3000:3000
   frontend:
+    depends_on:
+      - api
     build:
       context: ./frontend
       target: base
@@ -22,13 +31,6 @@ services:
       - ./frontend/src:/frontend/src
       - ./frontend/resources:/frontend/resources
       - ./frontend/public:/frontend/public
-  api:
-    depends_on:
-      - db
-    build:
-      context: .
-    ports:
-      - 3000:3000
   swagger:
     image: swaggerapi/swagger-ui
     restart: always
