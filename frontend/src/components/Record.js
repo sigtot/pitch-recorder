@@ -40,6 +40,17 @@ const DiffText = ({guess, actual}) => {
     }
 };
 
+const TimeFormat = ({time}) => (
+    new Date(time).toLocaleDateString('en-GB', {
+        weekday: 'long',
+        day: 'numeric',
+        year: 'numeric',
+        month: 'short',
+        hour: 'numeric',
+        minute: 'numeric',
+    })
+);
+
 export default function Record({id, guess, actual, time}) {
     return (
         <li>
@@ -51,7 +62,7 @@ export default function Record({id, guess, actual, time}) {
                     </KeyComp>
                 </div>
                 <div>
-                    <TimeSpan>{time}</TimeSpan>
+                    <TimeSpan><TimeFormat time={time}/></TimeSpan>
                 </div>
             </Wrapper>
         </li>
