@@ -9,21 +9,16 @@ The basic components:
 
 ## Basic Usage 
 ### Setup and Run
-Postgres, react and swagger lives in a docker network. Start it with
+Everything lives in a docker-compose network. Start it with
 ```bash
 docker-compose up
 ```
-The clojure api is run with Leiningen
-Dependencies:
-```bash
-lein deps
-```
-Run dev server:
-```bash
-lein ring server-headless
-```
+This exposes the following services:
+* API: http://localhost:3000
+* Frontend: http://localhost:3001
+* Swagger: http://localhost:8080
 
-### Test
+### Test (clojure)
 Run api tests with
 ```bash
 lein test
