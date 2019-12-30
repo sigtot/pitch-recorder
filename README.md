@@ -1,4 +1,4 @@
-# pitch-api
+# Pitch Recorder
 ## Basic Structure
 The basic components:
 * Clojure json API
