@@ -21,7 +21,6 @@ services:
     volumes:
       - ./src:/usr/src/app/src
       - ./test:/usr/src/app/test
-      - ./resources:/usr/src/app/resources
   frontend:
     depends_on:
       - api
@@ -33,7 +32,6 @@ services:
     command: ["yarn", "start"]
     volumes:
       - ./frontend/src:/frontend/src
-      - ./frontend/resources:/frontend/resources
       - ./frontend/public:/frontend/public
   swagger:
     image: swaggerapi/swagger-ui
