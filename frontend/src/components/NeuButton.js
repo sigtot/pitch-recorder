@@ -10,6 +10,7 @@ export default styled.button`
     font-size: 25px;
     font-weight: bold;
     margin: 0 10px;
+    cursor: pointer;
     &:active {
         box-shadow: 6px 6px 12px rgb(163,177,198,0.6), -6px -6px 12px rgba(255,255,255, 0.5);
     }
