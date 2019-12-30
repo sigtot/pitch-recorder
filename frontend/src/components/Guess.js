@@ -32,7 +32,7 @@ const GuessButtonContainer = styled(FlexCenter)`
 `;
 
 const postGuess = (guess, actual) => {
-    return fetch('/records', {
+    return fetch('/api/records', {
         method: 'POST',
         mode: 'cors',
         headers: {

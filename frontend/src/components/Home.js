@@ -43,7 +43,7 @@ export default function Home() {
     const [records, setRecords] = useState([]);
 
     useEffect(() => {
-        fetch('/records')
+        fetch('/api/records')
             .then(res => res.json())
             .then(JSON.parse) // res.json() returns a string -> parse it
             .then(recs => setRecords(recs))

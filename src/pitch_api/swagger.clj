@@ -11,7 +11,7 @@
       {:info  {:version     "1.0.0"
                :title       "API Docs"
                :description "Docs for the API"}
-       :paths {"/records" {:get {:summary     "Get records"
+       :paths {"/api/records" {:get {:summary     "Get records"
                                  :description "Show all records"
                                  :responses   {200 {:schema      Record
                                                     :description "Everything works as expected"}

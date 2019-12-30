@@ -17,13 +17,13 @@
     (json/-write (str date) out)))
 
 (defroutes app-routes
-           (GET "/records" []
+           (GET "/api/records" []
              (r/response (->> (records/get-records)
                               (m/encode "application/json"))))
-           (POST "/records" req
+           (POST "/api/records" req
              (r/response (->> (records/post-records req)
                               (m/encode "application/json"))))
-           (GET "/doc" []
+           (GET "/api/doc" []
              (r/response (->> (swagger/doc)
                               (m/encode "application/json"))))
            (route/not-found "Page not found"))
