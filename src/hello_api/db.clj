@@ -2,8 +2,8 @@
 
 (def pg-db {:dbtype   "postgresql"
             :dbname   "notes"
-            :host     "localhost"
+            :host     "db"
             :user     "postgres"
-            :port     5469
+            :port     5432
             :password "pass"})
 
