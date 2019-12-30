@@ -24,7 +24,7 @@ const FlexCenter = styled.div`
 `;
 
 const SmallerH1 = styled.div`
-font-size: 1.7em;
+    font-size: 1.7em;
 `;
 
 const GuessButtonContainer = styled(FlexCenter)`

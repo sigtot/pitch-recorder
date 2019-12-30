@@ -12,7 +12,7 @@ const Wrapper = styled.div`
 
 const ErrorSpan = styled.span`
     font-weight: bold;
-    font-size: 26px;
+    font-size: 20px;
 `;
 
 const KeyComp = styled.span`
@@ -25,14 +25,27 @@ const TimeSpan = styled.span`
     font-size: 12px;
 `;
 
+const PerfectSpan = styled(ErrorSpan)`
+    color: #4caf50;
+    text-shadow: 0 1px 2px rgba(76, 175, 80, 0.4);
+`;
+
+const DiffText = ({guess, actual}) => {
+    const diff = Math.abs(guess - actual);
+    const halfToneDiff = diff / 2;
+    if (diff === 0) {
+        return <PerfectSpan>Perfect!</PerfectSpan>;
+    } else {
+        return <ErrorSpan>{halfToneDiff} off</ErrorSpan>;
+    }
+};
+
 export default function Record({id, guess, actual, time}) {
     return (
         <li>
             <Wrapper key={id}>
                 <div>
-                    <ErrorSpan>
-                        {Math.abs(guess - actual) / 2}
-                    </ErrorSpan>&nbsp;
+                    <DiffText guess={guess} actual={actual}/>&nbsp;
                     <KeyComp>
                         ({keyName(guess)}/{keyName(actual)})
                     </KeyComp>
