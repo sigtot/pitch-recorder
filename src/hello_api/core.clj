@@ -9,12 +9,12 @@
             [ring.util.response :as r]
             [hello-api.records :as records]
             [hello-api.swagger :as swagger])
-  (:import (java.sql Time)))
+  (:import (java.sql Timestamp)))
 
-(extend-type Time
+(extend-type Timestamp
   json/JSONWriter
-  (-write [time out]
-    (json/-write (str time) out)))
+  (-write [date out]
+    (json/-write (str date) out)))
 
 (defroutes app-routes
            (GET "/records" []
