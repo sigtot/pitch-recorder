@@ -4,5 +4,6 @@
             :dbname   "notes"
             :host     "localhost"
             :user     "postgres"
+            :port     5469
             :password "pass"})
 
