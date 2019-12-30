@@ -16,7 +16,7 @@ docker-compose up
 This exposes the following services:
 * API: http://localhost:3000
 * Frontend: http://localhost:3001
-* Swagger: http://localhost:8080
+* Swagger: http://localhost:3002
 
 ### Test (clojure)
 Run api tests with
