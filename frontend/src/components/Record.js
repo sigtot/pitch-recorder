@@ -3,14 +3,16 @@ import {keyName} from '../piano';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-    border-top: solid 1px #d9e0e7;
+    border-top: solid 1px #d4d9e0;
     padding: 10px 0;
     color: #333;
+    display: flex;
+    justify-content: space-between;
 `;
 
 const ErrorSpan = styled.span`
     font-weight: bold;
-    font-size: 20px;
+    font-size: 26px;
 `;
 
 const KeyComp = styled.span`

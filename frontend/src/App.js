@@ -7,6 +7,7 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
     background-color:#e0e5ec;
+    padding: 0 2em;
 `;
 
 function App() {
