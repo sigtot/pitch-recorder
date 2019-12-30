@@ -19,6 +19,4 @@
   :ring {:handler pitch-api.core/app}
   :repl-options {:init-ns pitch-api.core}
   :profiles
-  {:dev {:dependencies [[ring/ring-mock "0.3.2"]]}}
-  :jvm-opts ["-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5010"])
-
+  {:dev {:dependencies [[ring/ring-mock "0.3.2"]]}})
