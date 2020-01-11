@@ -11,13 +11,13 @@
       {:info  {:version     "1.0.0"
                :title       "API Docs"
                :description "Docs for the API"}
-       :paths {"/api/records" {:get {:summary     "Get records"
-                                 :description "Show all records"
-                                 :responses   {200 {:schema      Record
-                                                    :description "Everything works as expected"}
-                                               404 {:description "(Not implemented)"}}}
-                           :post {:summary    "Create record"
-                                 :description "Create a new record"
-                                 :parameters  {:body Record}
-                                 :responses   {200 {:schema      Record
-                                                    :description "Everything works as expected"}}}}}})))
+       :paths {"/api/records" {:get  {:summary     "Get records"
+                                      :description "Show all records"
+                                      :responses   {200 {:schema      Record
+                                                         :description "Everything works as expected"}
+                                                    404 {:description "(Not implemented)"}}}
+                               :post {:summary     "Create record"
+                                      :description "Create a new record"
+                                      :parameters  {:body Record}
+                                      :responses   {200 {:schema      Record
+                                                         :description "Everything works as expected"}}}}}})))
