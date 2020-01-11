@@ -18,12 +18,13 @@
 
 (defroutes app-routes
            (context "/api" {}
-             (GET "/records" []
-               (r/response (->> (records/get-records)
-                                (m/encode "application/json"))))
-             (POST "/records" req
-               (r/response (->> (records/post-records req)
-                                (m/encode "application/json"))))
+             (context "/records" {}
+               (GET "/" []
+                 (r/response (->> (records/get-records)
+                                  (m/encode "application/json"))))
+               (POST "/" req
+                 (r/response (->> (records/post-records req)
+                                  (m/encode "application/json")))))
              (GET "/doc" []
                (r/response (->> (swagger/doc)
                                 (m/encode "application/json")))))
