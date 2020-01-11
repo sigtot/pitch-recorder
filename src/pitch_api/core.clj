@@ -1,5 +1,5 @@
 (ns pitch-api.core
-  (:require [compojure.core :refer :all]
+  (:require [compojure.core :refer [context routes GET POST]]
             [compojure.route :as route]
             [clojure.data.json :as json]
             [ring.middleware.defaults :refer [wrap-defaults api-defaults]]
@@ -16,19 +16,22 @@
   (-write [date out]
     (json/-write (str date) out)))
 
-(defroutes app-routes
-           (context "/api" {}
-             (context "/records" {}
-               (GET "/" []
-                 (r/response (->> (records/get-records)
-                                  (m/encode "application/json"))))
-               (POST "/" req
-                 (r/response (->> (records/post-records req)
-                                  (m/encode "application/json")))))
-             (GET "/doc" []
-               (r/response (->> (swagger/doc)
-                                (m/encode "application/json")))))
-           (route/not-found "Page not found"))
+(def app-routes
+  (routes
+    (context "/api" {}
+      (routes
+        (context "/records" {}
+          (routes
+            (GET "/" []
+              (r/response (->> (records/get-records)
+                               (m/encode "application/json"))))
+            (POST "/" req
+              (r/response (->> (records/post-records req)
+                               (m/encode "application/json"))))))
+        (GET "/doc" []
+          (r/response (->> (swagger/doc)
+                           (m/encode "application/json"))))))
+    (route/not-found "Page not found")))
 
 (def app
   (-> app-routes
