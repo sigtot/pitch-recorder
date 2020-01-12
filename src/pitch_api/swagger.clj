@@ -1,6 +1,8 @@
 (ns pitch-api.swagger
   (:require [ring.swagger.swagger2 :as rs]
-            [schema.core :as s]))
+            [compojure.core :as cc]
+            [schema.core :as s])
+  (:import (clojure.lang IFn AFn)))
 
 (s/defschema Record {:guess  s/Int
                      :actual s/Int})
@@ -21,3 +23,31 @@
                                       :parameters  {:body Record}
                                       :responses   {200 {:schema      Record
                                                          :description "Everything works as expected"}}}}}})))
+
+(defrecord Route [path method swagger childs handler]
+  compojure.response/Renderable
+  (render [_ request]
+    ((first handler) request))
+
+  IFn
+  (invoke [_ request]
+    (handler request))
+  (invoke [_ request respond raise]
+    (handler request respond raise))
+
+  (applyTo [this args]
+    (AFn/applyToHelper this args)))
+
+(defn make-route [method path args swagger body]
+  `(map->Route {:path    ~path
+                :method  ~method
+                :swagger ~swagger
+                :handler ~(cc/compile-route method path args (list `(do ~@body)))}))
+
+(defmacro GET "Generate a `GET` route with swagger docs."
+  [path args swagger & body]
+  (make-route :get path args swagger body))
+
+(defmacro POST "Generate a `POST` route with swagger docs."
+  [path args swagger & body]
+  (make-route :post path args swagger body))

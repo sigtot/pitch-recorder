@@ -5,7 +5,8 @@
             [pitch-api.utils :as utils]
             [pitch-api.db :refer [pg-db]]
             [muuntaja.core :as m]
-            [compojure.core :refer [context routes GET POST]]
+            [compojure.core :refer [context routes]]
+            [pitch-api.swagger :refer [GET POST]]
             [ring.util.response :as r]))
 
 (defn get-records []
@@ -24,8 +25,10 @@
   (context "/records" []
     (routes
       (GET "/" []
-        (r/response (->> (get-records)
-                         (m/encode "application/json"))))
+           {:spec ::specs/record}
+           (r/response (->> (get-records)
+                            (m/encode "application/json"))))
       (POST "/" req
-        (r/response (->> (post-records req)
-                         (m/encode "application/json")))))))
+            {:spec ::specs/record}
+            (r/response (->> (post-records req)
+                             (m/encode "application/json")))))))
