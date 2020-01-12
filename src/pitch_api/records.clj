@@ -3,7 +3,10 @@
             [clojure.java.jdbc :as jdbc]
             [pitch-api.spec :as specs]
             [pitch-api.utils :as utils]
-            [pitch-api.db :refer [pg-db]]))
+            [pitch-api.db :refer [pg-db]]
+            [muuntaja.core :as m]
+            [compojure.core :refer [context routes GET POST]]
+            [ring.util.response :as r]))
 
 (defn get-records []
   (json/write-str
@@ -15,4 +18,14 @@
     (if-let [err (specs/malformed? ::specs/record entity)]
       err
       (do (jdbc/insert! pg-db :record entity)
-       (json/write-str {:ok true})))))
+          (json/write-str {:ok true})))))
+
+(defn records-api []
+  (context "/records" []
+    (routes
+      (GET "/" []
+        (r/response (->> (get-records)
+                         (m/encode "application/json"))))
+      (POST "/" req
+        (r/response (->> (post-records req)
+                         (m/encode "application/json")))))))

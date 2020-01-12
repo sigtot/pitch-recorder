@@ -7,7 +7,7 @@
             [ring.middleware.cors :refer [wrap-cors]]
             [muuntaja.core :as m]
             [ring.util.response :as r]
-            [pitch-api.records :as records]
+            [pitch-api.records :refer [records-api]]
             [pitch-api.swagger :as swagger])
   (:import (java.sql Timestamp)))
 
@@ -20,14 +20,7 @@
   (routes
     (context "/api" {}
       (routes
-        (context "/records" {}
-          (routes
-            (GET "/" []
-              (r/response (->> (records/get-records)
-                               (m/encode "application/json"))))
-            (POST "/" req
-              (r/response (->> (records/post-records req)
-                               (m/encode "application/json"))))))
+        (records-api)
         (GET "/doc" []
           (r/response (->> (swagger/doc)
                            (m/encode "application/json"))))))
