@@ -24,7 +24,13 @@
                                       :responses   {200 {:schema      Record
                                                          :description "Everything works as expected"}}}}}})))
 
+(defprotocol With-swagger
+  (get-doc [this]))
+
 (defrecord Route [path method swagger childs handler]
+  With-swagger
+  (get-doc [this] (:swagger this))
+
   compojure.response/Renderable
   (render [_ request]
     ((first handler) request))
