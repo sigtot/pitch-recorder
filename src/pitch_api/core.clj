@@ -1,5 +1,5 @@
 (ns pitch-api.core
-  (:require [compojure.core :refer [context routes GET POST]]
+  (:require [compojure.core :refer [context GET POST]]
             [compojure.route :as route]
             [clojure.data.json :as json]
             [ring.middleware.defaults :refer [wrap-defaults api-defaults]]
@@ -17,9 +17,9 @@
     (json/-write (str date) out)))
 
 (def app-routes
-  (routes
+  (swagger/routes
     (context "/api" {}
-      (routes
+      (swagger/routes
         (records-api)
         (GET "/doc" []
           (r/response (->> (swagger/doc)

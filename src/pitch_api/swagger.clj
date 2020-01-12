@@ -44,7 +44,7 @@
   (applyTo [this args]
     (AFn/applyToHelper this args)))
 
-(defn make-route [method path args swagger body]
+(defn verb-route [method path args swagger body]
   `(map->Route {:path    ~path
                 :method  ~method
                 :swagger ~swagger
@@ -52,8 +52,15 @@
 
 (defmacro GET "Generate a `GET` route with swagger docs."
   [path args swagger & body]
-  (make-route :get path args swagger body))
+  (verb-route :get path args swagger body))
 
 (defmacro POST "Generate a `POST` route with swagger docs."
   [path args swagger & body]
-  (make-route :post path args swagger body))
+  (verb-route :post path args swagger body))
+
+(defn routes
+  "Create a Ring handler by combining several handlers into one, preserving swagger if available."
+  [& handlers]
+  (map->Route
+    {:childs (vec handlers)
+     :handler (apply cc/routes handlers)}))
